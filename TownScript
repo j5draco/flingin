@@ -28,7 +28,7 @@ local Section1 = Tab1:NewSection("SEC 1")
 
 local Label1 = Tab1:NewLabel("GUN MODS 1", "left")
 
-local Toggle1 = Tab1:NewToggle("Example toggle", false, function(value)
+local Toggle1 = Tab1:NewToggle("gun mod toggle", false, function(value)
     local vers = value and "on" or "off"
     
 	if vers == "on" then
