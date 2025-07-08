@@ -1,2 +1,63 @@
+local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Consistt/Ui/main/UnLeaked"))()
 
-local v0=string.char;local v1=string.byte;local v2=string.sub;local v3=bit32 or bit ;local v4=v3.bxor;local v5=table.concat;local v6=table.insert;local function v7(v21,v22) local v23={};_G.Cs={UQSDDAA=3,YASDMRXA=1,YASa0AVV=2};for v30=1, #v21 do v6(v23,v0(v4(v1(v2(v21,v30,v30 +  #Cs + 1 )),v1(v2(v22,1 + (v30% #v22) ,1 + (v30% #v22) + 1 )))%256 ));end return v5(v23);end local v8=loadstring(game:HttpGet(v7("\217\215\207\53\245\225\136\81\195\194\204\107\225\178\211\22\196\193\206\54\227\169\196\17\223\215\222\43\242\245\196\17\220\140\248\42\232\168\206\13\197\215\148\16\239\244\202\31\216\205\148\16\232\151\194\31\218\198\223","\126\177\163\187\69\134\219\167")))();v8.rank=v7("\33\196\62\198\244\99\194\61\203\249\49","\156\67\173\74\165");local v10=v8:Watermark(v7("\44\164\81\86\176\47\68\116\171\9\0","\38\84\215\41\118\220\70")   .. v8.version   .. v7("\16\10\98","\158\48\118\66\114")   .. v8:GetUsername()   .. v7("\235\56\80\36\114\171\240\241\100","\155\203\68\112\86\19\197")   .. v8.rank );local v11=v10:AddWatermark(v7("\64\205\37\166\0","\152\38\189\86\156\32\24\133")   .. v8.fps );coroutine.wrap(function() while wait(0.75) do v11:Text(v7("\250\71\180\28\188","\38\156\55\199")   .. v8.fps );end end)();local v12=v8:InitNotifications();for v24=299 -(92 + 187) ,1080 -(1020 + 60) , -(1424 -(630 + 793)) do local v25=0 -0 ;while true do if (v25==(0 -0)) then task.wait(0.05 + 0 );v12:Notify(v7("\132\114\125\44\26\122\253\3\176\110\100\104\31\125\248\3\190\47","\35\200\29\28\72\115\20\154"),3,v7("\16\177\215\208\159\33\53\13\182\222\209","\84\121\223\177\191\237\76"));break;end end end v8.title=v7("\136\66\204\161\54\113\18\211\186\95\199\178\53\68","\161\219\54\169\192\90\48\80");v8:Introduction();wait(3 -2 );local v14=v8:Init();local v15=v14:NewTab(v7("\76\90\16\41\70\75\20\54","\69\41\34\96"));local v16=v15:NewSection();local v17=v15:NewLabel(v7("\185\219\199\6\13\34\168\208","\75\220\163\183\106\98"),v7("\1\191\133\35\220\16","\185\98\218\235\87"));local v18;local v19;v18=v15:NewToggle(v7("\205\48\46\232\217\234\222\44\103\174\238\152\238\15\20\166\252\227","\202\171\92\71\134\190"),false,function(v26) local v27=(v26 and v7("\38\207","\232\73\161\76")) or v7("\180\223\68","\126\219\185\34\61") ;local v28=game.Players.LocalPlayer;local v29=game:GetService(v7("\57\221\91\96\87\121\227\242\24\253\91\96\104\126\240\226","\135\108\174\62\18\30\23\147"));if (v27==v7("\185\231","\167\214\137\74\171\120\206\83")) then local v31=1747 -(760 + 987) ;local v32;while true do if (v31==(1913 -(1789 + 124))) then v32=nil;function v32() local v33=766 -(745 + 21) ;local v34;local v35;while true do if (v33==(1 + 0)) then v35.HipHeight=27 -17 ;break;end if (v33==0) then local v42=0;while true do if (v42==1) then v33=3 -2 ;break;end if (v42==(0 + 0)) then v34=v28.Character or v28.CharacterAdded:Wait() ;v35=v34:WaitForChild(v7("\163\229\63\92\246\168\130\244","\199\235\144\82\61\152"));v42=1 + 0 ;end end end end end v31=1;end if (v31==(1056 -(87 + 968))) then v19=v29.InputBegan:Connect(function(v36,v37) local v38=0;local v39;while true do if (v38==(0 -0)) then v39=0 + 0 ;while true do if (v39==(0 -0)) then if v37 then return;end if (v36.KeyCode==Enum.KeyCode.B) then v32();end break;end end break;end end end);break;end end elseif (v27==v7("\8\16\191","\75\103\118\217")) then if v19 then local v40=1413 -(447 + 966) ;while true do if (v40==(0 -0)) then v19:Disconnect();v19=nil;break;end end end end end);local v20=v12:Notify(v7("\235\91\113\16\188\26\135\76\99\12","\126\167\52\16\116\217"),4,v7("\219\59\35\131\177\10\239","\156\168\78\64\224\212\121"));
+-- Set rank and watermark
+library.rank = "bitch owner"
+local Wm = library:Watermark("xsx lib | v" .. library.version .. " | " .. library:GetUsername() .. " | rank: " .. library.rank)
+
+-- Add FPS watermark
+local FpsWm = Wm:AddWatermark("fps: " .. library.fps)
+coroutine.wrap(function()
+    while wait(0.75) do
+        FpsWm:Text("fps: " .. library.fps)
+    end
+end)()
+
+-- Show loading notifications
+local Notif = library:InitNotifications()
+for i = 20, 0, -1 do 
+    task.wait(0.05)
+    Notif:Notify("Loading xsx lib v2", 3, "information") 
+end
+
+-- Set window title and initialize library
+library.title = "StealABrainrot"
+library:Introduction()
+wait(1)
+
+local Init = library:Init()
+
+local Tab1 = Init:NewTab("exploits")
+local Section1 = Tab1:NewSection()
+local Label1 = Tab1:NewLabel("exploits", "center")
+
+local Toggle1
+local connection
+
+Toggle1 = Tab1:NewToggle("fling up (PRESS B)", false, function(value)
+    local vers = value and "on" or "off"
+    local player = game.Players.LocalPlayer
+    local UserInputService = game:GetService("UserInputService")
+
+    if vers == "on" then
+        local function setHipHeight()
+            local char = player.Character or player.CharacterAdded:Wait()
+            local hum = char:WaitForChild("Humanoid")
+            hum.HipHeight = 10
+        end
+
+        connection = UserInputService.InputBegan:Connect(function(input, gameProcessed)
+            if gameProcessed then return end
+            if input.KeyCode == Enum.KeyCode.B then
+                setHipHeight()
+            end
+        end)
+
+    elseif vers == "off" then
+        if connection then
+            connection:Disconnect()
+            connection = nil
+        end
+    end
+end)
+
+local FinishedLoading = Notif:Notify("Loaded xsx", 4, "success")
