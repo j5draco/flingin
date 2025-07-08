@@ -1,1 +1,76 @@
-print("test before codin")
+local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Consistt/Ui/main/UnLeaked"))()
+
+library.rank = "test"
+local Wm = library:Watermark("xsx example | v" .. library.version ..  " | " .. library:GetUsername() .. " | rank: " .. library.rank)
+local FpsWm = Wm:AddWatermark("fps: " .. library.fps)
+coroutine.wrap(function()
+    while wait(.75) do
+        FpsWm:Text("fps: " .. library.fps)
+    end
+end)()
+
+local Notif = library:InitNotifications()
+
+for i = 20,0,-1 do 
+    task.wait(0.05)
+    local LoadingXSX = Notif:Notify("Loading xsx lib v2", 3, "information") 
+end 
+
+library.title = "Vigil"
+
+library:Introduction()
+wait(1)
+local Init = library:Init()
+
+local Tab1 = Init:NewTab("GUN MODS")
+
+local Section1 = Tab1:NewSection("SEC 1")
+
+local Label1 = Tab1:NewLabel("GUN MODS 1", "left")
+
+local Toggle1 = Tab1:NewToggle("Example toggle", false, function(value)
+    local vers = value and "on" or "off"
+    
+	if vers == "on" then
+		
+local player = game.Players.LocalPlayer
+
+local function setupCharacter(character)
+
+	character.ChildAdded:Connect(function(child)
+
+		if child:IsA("Tool") then
+
+			local settingsModule = child:FindFirstChild("Settings")
+
+			if settingsModule and settingsModule:IsA("ModuleScript") then
+
+				local m = require(settingsModule)
+
+				m.AimSpeed = 0.01
+
+				m.GunRecoil = 0.01
+			end
+		end
+	end)
+end
+
+
+if player.Character then
+
+	setupCharacter(player.Character)
+
+end
+
+
+player.CharacterAdded:Connect(setupCharacter)
+
+
+	end
+
+
+end):AddKeybind(Enum.KeyCode.RightControl)
+
+
+
+local FinishedLoading = Notif:Notify("Loaded xsx", 4, "success")
