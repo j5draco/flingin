@@ -1,76 +1,119 @@
+-- Load UI Library
 local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Consistt/Ui/main/UnLeaked"))()
 
-library.rank = "test"
-local Wm = library:Watermark("xsx lib | v" .. library.version ..  " | " .. library:GetUsername() .. " | rank: " .. library.rank)
+-- Set rank and watermark
+library.rank = "bitch owner"
+local Wm = library:Watermark("xsx lib | v" .. library.version .. " | " .. library:GetUsername() .. " | rank: " .. library.rank)
+
+-- Add FPS watermark
 local FpsWm = Wm:AddWatermark("fps: " .. library.fps)
 coroutine.wrap(function()
-    while wait(.75) do
+    while wait(0.75) do
         FpsWm:Text("fps: " .. library.fps)
     end
 end)()
 
+-- Show loading notifications
 local Notif = library:InitNotifications()
-
-for i = 20,0,-1 do 
+for i = 20, 0, -1 do 
     task.wait(0.05)
-    local LoadingXSX = Notif:Notify("Loading xsx lib v2", 3, "information") 
-end 
+    Notif:Notify("Loading xsx lib v2", 3, "information") 
+end
 
+-- Set window title and initialize library
 library.title = "Vigil"
-
 library:Introduction()
 wait(1)
+
 local Init = library:Init()
 
+-- Create tab and section
 local Tab1 = Init:NewTab("GUN MODS")
-
-local Section1 = Tab1:NewSection("SEC 1")
-
-local Label1 = Tab1:NewLabel("GUN MODS 1", "left")
-
-local Toggle1 = Tab1:NewToggle("gun mod toggle", false, function(value)
-    local vers = value and "on" or "off"
-    
-	if vers == "on" then
-		
-local player = game.Players.LocalPlayer
-
-local function setupCharacter(character)
-
-	character.ChildAdded:Connect(function(child)
-
-		if child:IsA("Tool") then
-
-			local settingsModule = child:FindFirstChild("Settings")
-
-			if settingsModule and settingsModule:IsA("ModuleScript") then
-
-				local m = require(settingsModule)
-
-				m.AimSpeed = 0.01
-
-				m.GunRecoil = 0.01
-			end
-		end
-	end)
-end
+local Tab2 = Init:NewTab("MISC")
+local Section1 = Tab1:NewSection("gun mods")
+local Section2 = Tab2:NewSection("misc mods")
+local Label1 = Tab1:NewLabel("GUN MODS", "center")
+local Label2 = Tab2:NewLabel("misc mods", "center")
 
 
-if player.Character then
+local Toggle1 = Tab2:NewToggle("esp toggle", false, function(value)
+	local vers = value and "on" or "off"
 
-	setupCharacter(player.Character)
+	local Players = game:GetService("Players")
+	local LocalPlayer = Players.LocalPlayer
 
-end
+	-- Function to highlight a character
+	local function highlightCharacter(character)
+		if character:FindFirstChild("Highlight") then return end
 
-
-player.CharacterAdded:Connect(setupCharacter)
-
-
+		local highlight = Instance.new("Highlight")
+		highlight.Name = "Highlight"
+		highlight.FillColor = Color3.fromRGB(255, 255, 0) -- Yellow
+		highlight.OutlineColor = Color3.fromRGB(255, 255, 255)
+		highlight.OutlineTransparency = 0
+		highlight.FillTransparency = 0.5
+		highlight.Adornee = character
+		highlight.Parent = character
 	end
 
+	if vers == "on" then
+		-- Apply highlight to current players
+		for _, player in pairs(Players:GetPlayers()) do
+			if player ~= LocalPlayer and player.Character then
+				highlightCharacter(player.Character)
+			end
+		end
 
-end):AddKeybind(Enum.KeyCode.RightControl)
+		-- Listen for new characters
+		for _, player in pairs(Players:GetPlayers()) do
+			if player ~= LocalPlayer then
+				player.CharacterAdded:Connect(function(character)
+					character:WaitForChild("HumanoidRootPart", 5)
+					highlightCharacter(character)
+				end)
+			end
+		end
+	else
+		-- Remove all highlights
+		for _, player in pairs(Players:GetPlayers()) do
+			if player ~= LocalPlayer and player.Character then
+				local highlight = player.Character:FindFirstChild("Highlight")
+				if highlight then
+					highlight:Destroy()
+				end
+			end
+		end
+	end
+end)
 
 
 
+local Toggle2 = Tab1:NewToggle("gun mod toggle", false, function(value)
+    local vers = value and "on" or "off"
+
+    if vers == "on" then
+        local player = game.Players.LocalPlayer
+
+        local function setupCharacter(character)
+            character.ChildAdded:Connect(function(child)
+                if child:IsA("Tool") then
+                    local settingsModule = child:FindFirstChild("Settings")
+                    if settingsModule and settingsModule:IsA("ModuleScript") then
+                        local m = require(settingsModule)
+                        m.AimSpeed = 0.01
+                        m.GunRecoil = 0.01
+                    end
+                end
+            end)
+        end
+
+        if player.Character then
+            setupCharacter(player.Character)
+        end
+
+        player.CharacterAdded:Connect(setupCharacter)
+    end
+end)
+
+-- Final notification
 local FinishedLoading = Notif:Notify("Loaded xsx", 4, "success")
