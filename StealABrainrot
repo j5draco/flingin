@@ -1,1 +1,64 @@
 
+local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Consistt/Ui/main/UnLeaked"))()
+
+-- Set rank and watermark
+library.rank = "bitch owner"
+local Wm = library:Watermark("xsx lib | v" .. library.version .. " | " .. library:GetUsername() .. " | rank: " .. library.rank)
+
+-- Add FPS watermark
+local FpsWm = Wm:AddWatermark("fps: " .. library.fps)
+coroutine.wrap(function()
+    while wait(0.75) do
+        FpsWm:Text("fps: " .. library.fps)
+    end
+end)()
+
+-- Show loading notifications
+local Notif = library:InitNotifications()
+for i = 20, 0, -1 do 
+    task.wait(0.05)
+    Notif:Notify("Loading xsx lib v2", 3, "information") 
+end
+
+-- Set window title and initialize library
+library.title = "Vigil"
+library:Introduction()
+wait(1)
+
+local Init = library:Init()
+
+local Tab1 = Init:NewTab()
+local Section1 = Tab1:NewSection()
+local Label1 = Tab1:NewLabel("exploits", "center")
+
+local Toggle1
+local connection
+
+Toggle1 = Tab1:NewToggle("fling up (PRESS B)", false, function(value)
+    local vers = value and "on" or "off"
+    local player = game.Players.LocalPlayer
+    local UserInputService = game:GetService("UserInputService")
+
+    if vers == "on" then
+        local function setHipHeight()
+            local char = player.Character or player.CharacterAdded:Wait()
+            local hum = char:WaitForChild("Humanoid")
+            hum.HipHeight = 10
+        end
+
+        connection = UserInputService.InputBegan:Connect(function(input, gameProcessed)
+            if gameProcessed then return end
+            if input.KeyCode == Enum.KeyCode.B then
+                setHipHeight()
+            end
+        end)
+
+    elseif vers == "off" then
+        if connection then
+            connection:Disconnect()
+            connection = nil
+        end
+    end
+end)
+
+local FinishedLoading = Notif:Notify("Loaded xsx", 4, "success")
