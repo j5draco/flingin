@@ -1,0 +1,102 @@
+local Decimals = 4
+local Clock = os.clock()
+local ValueText = "Value Is Now :"
+
+local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/drillygzzly/Roblox-UI-Libs/main/1%20Tokyo%20Lib%20(FIXED)/Tokyo%20Lib%20Source.lua"))({
+    cheatname = "cheat",
+    gamename = "Stud Simulator [BETA]",
+})
+
+library:init()
+
+local Window1 = library.NewWindow({
+    title = "made by draco | stud simulator",
+    size = UDim2.new(0, 510, 0, 530)
+})
+
+local Tab1 = Window1:AddTab("  exploits  ")
+local SettingsTab = library:CreateSettingsTab(Window1)
+
+local Section1 = Tab1:AddSection("auto", 1)
+
+_G.auto = false
+local collecting = false
+
+Section1:AddToggle({
+    text = "auto collect studs",
+    state = false,
+    risky = false,
+    tooltip = "YOU HAVE TO BE NEAR THE PART",
+    flag = "",
+    callback = function(v)
+        _G.auto = v
+        if _G.auto and not collecting then
+            collecting = true
+            task.spawn(function()
+                while _G.auto do
+                    local plr = game.Players.LocalPlayer
+                    local char = plr.Character or plr.CharacterAdded:Wait()
+                    local root = char:FindFirstChild("HumanoidRootPart")
+                    if root then
+                        for _, part in ipairs(workspace:GetChildren()) do
+                            if part:IsA("BasePart") and string.find(part.Name, "Stud") then
+                                firetouchinterest(root, part, 0)
+                                firetouchinterest(root, part, 1)
+                            end
+                        end
+                    end
+                    task.wait(0.1)
+                end
+                collecting = false
+            end)
+        end
+    end
+})
+
+Section1:AddButton({
+    enabled = true,
+    text = "turn off collect sound",
+    tooltip = "",
+    confirm = false,
+    risky = false,
+    callback = function()
+        -- Save your ears
+        pcall(function()
+            local s = game:GetService("ReplicatedStorage"):FindFirstChild("Sounds")
+            if s then
+                local notice = s:FindFirstChild("Notice")
+                local errorSound = s:FindFirstChild("Error")
+                if notice then notice.Volume = 0 end
+                if errorSound then errorSound.Volume = 0 end
+            end
+        end)
+    end
+})
+
+local Section2 = Tab1:AddSection("walkspeed", 1)
+
+
+Section2:AddSlider({
+    enabled = true,
+    text = "walkspeed",
+    tooltip = "",
+    flag = "",
+    suffix = "",
+    dragging = true,
+    focused = false,
+    min = 0,
+    max = 1000,
+    increment = 1,
+    risky = false,
+    callback = function(v)
+        local plr = game.Players.LocalPlayer
+        local char = plr.Character
+        local hum = char:WaitForChild("Humanoid")
+
+        hum.WalkSpeed = v
+
+        if hum.WalkSpeed ~= v then
+            hum.WalkSpeed = v
+        end
+    end
+})
