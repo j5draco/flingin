@@ -1,63 +1,133 @@
 local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Consistt/Ui/main/UnLeaked"))()
 
--- Set rank and watermark
+
 library.rank = "bitch owner"
 local Wm = library:Watermark("xsx lib | v" .. library.version .. " | " .. library:GetUsername() .. " | rank: " .. library.rank)
 
--- Add FPS watermark
+
 local FpsWm = Wm:AddWatermark("fps: " .. library.fps)
 coroutine.wrap(function()
-    while wait(0.75) do
-        FpsWm:Text("fps: " .. library.fps)
-    end
+	while wait(0.75) do
+		FpsWm:Text("fps: " .. library.fps)
+	end
 end)()
 
--- Show loading notifications
+
 local Notif = library:InitNotifications()
 for i = 20, 0, -1 do 
-    task.wait(0.05)
-    Notif:Notify("Loading xsx lib v2", 3, "information") 
+	task.wait(0.05)
+	Notif:Notify("Loading xsx lib v2", 3, "information") 
 end
 
--- Set window title and initialize library
+
 library.title = "StealABrainrot"
 library:Introduction()
 wait(1)
 
 local Init = library:Init()
 
+
 local Tab1 = Init:NewTab("exploits")
+local Tab2 = Init:NewTab("misc")
+
 local Section1 = Tab1:NewSection()
-local Label1 = Tab1:NewLabel("exploits", "center")
+local Section2 = Tab2:NewSection()
 
-local Toggle1
-local connection
+Tab1:NewLabel("exploits", "center")
+Tab2:NewLabel("misc tab", "center")
 
-Toggle1 = Tab1:NewToggle("fling up (PRESS B)", false, function(value)
-    local vers = value and "on" or "off"
-    local player = game.Players.LocalPlayer
-    local UserInputService = game:GetService("UserInputService")
 
-    if vers == "on" then
-        local function setHipHeight()
-            local char = player.Character or player.CharacterAdded:Wait()
-            local hum = char:WaitForChild("Humanoid")
-            hum.HipHeight = 10
-        end
+local flingConnection
+Tab1:NewToggle("fling up (PRESS B)", false, function(value)
+	local player = game.Players.LocalPlayer
+	local UserInputService = game:GetService("UserInputService")
 
-        connection = UserInputService.InputBegan:Connect(function(input, gameProcessed)
-            if gameProcessed then return end
-            if input.KeyCode == Enum.KeyCode.B then
-                setHipHeight()
-            end
-        end)
+	local function setHipHeight()
+		local char = player.Character or player.CharacterAdded:Wait()
+		local hum = char:WaitForChild("Humanoid")
+		hum.HipHeight = 10
+	end
 
-    elseif vers == "off" then
-        if connection then
-            connection:Disconnect()
-            connection = nil
-        end
-    end
+	if value then
+		flingConnection = UserInputService.InputBegan:Connect(function(input, gameProcessed)
+			if not gameProcessed and input.KeyCode == Enum.KeyCode.B then
+				setHipHeight()
+			end
+		end)
+	else
+		if flingConnection then
+			flingConnection:Disconnect()
+			flingConnection = nil
+		end
+	end
 end)
 
-local FinishedLoading = Notif:Notify("Loaded xsx", 4, "success")
+
+local espRunning = false
+local espThread
+
+Tab2:NewToggle("ESP (brainrot god and secret)", false, function(value)
+	_G.esp = value
+	espRunning = value
+
+	local targetNames = {
+		"Cocofanto Elefanto",
+		"Gattatino Nyanino",
+		"Girafa Celestre",
+		"Matteo",
+		"Tralalero Tralala",
+		"Odin Din Din Dun",
+		"Unclito Samito",
+		"Trenostruzzo Turbo 3000"
+	}
+
+	local rareNames = {
+		"La Vacca Saturno Saturnita",
+		"Sammyni Spiderini",
+		"Los Tralaleritos",
+		"Graipuss Medussi",
+		"La Grande Combinazione",
+		"Garama and Madundung"
+	}
+
+	local function highlightObject(obj, color)
+		if obj:FindFirstChild("Highlight") then return end
+
+		local highlight = Instance.new("Highlight")
+		highlight.FillColor = color
+		highlight.OutlineColor = Color3.fromRGB(255, 255, 255)
+		highlight.FillTransparency = 0.5
+		highlight.OutlineTransparency = 0
+		highlight.Parent = obj
+	end
+
+	if espThread then
+		espThread:Disconnect()
+		espThread = nil
+	end
+
+	if value then
+		espThread = coroutine.wrap(function()
+			while espRunning do
+				for _, obj in ipairs(workspace:GetDescendants()) do
+					if obj:IsA("Model") or obj:IsA("Part") then
+						if table.find(targetNames, obj.Name) then
+							highlightObject(obj, Color3.fromRGB(255, 0, 0)) 
+						elseif table.find(rareNames, obj.Name) then
+							highlightObject(obj, Color3.fromRGB(0, 0, 0)) 
+						end
+					end
+				end
+				wait(0.4)
+			end
+		end)()
+	end
+end)
+
+
+Tab2:NewButton("copy discord link", function()
+	toclipboard("https://discord.gg/nsaCwj8d3j")
+end)
+
+
+Notif:Notify("Loaded xsx", 4, "success")
