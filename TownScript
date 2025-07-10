@@ -115,5 +115,10 @@ local Toggle2 = Tab1:NewToggle("gun mod toggle", false, function(value)
     end
 end)
 
--- Final notification
+
+Tab2:NewButton("copy discord link", function()
+	toclipboard("https://discord.gg/nsaCwj8d3j")
+end)
+
+
 local FinishedLoading = Notif:Notify("Loaded xsx", 4, "success")
